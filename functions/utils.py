@@ -5,7 +5,18 @@ def eliminate_provider(df_cap, df_conn , prov):
     """
     Eliminate a Provider from the problem. 
 
+    Args:
+        df_cap (pd.DataFrame): data frame containing nodes capacity info. 
+        df_conn (pd.DataFrame): dataframe containing edges/connections info. 
+        prov (list): list contiaining Providers to eliminate from network. 
+
+    Returns: 
+        (pd.DataFrame): data frame containing nodes capacity info
+        (pd.DataFrame): dataframe containing edges/connections info.
+
     """
+
+    
     # Eliminate Provider in capacities data frame
     df_cap = df_cap[~df_cap['NodeName'].isin(prov)].copy(deep = True).reset_index(drop = True)
 
@@ -16,7 +27,15 @@ def eliminate_provider(df_cap, df_conn , prov):
 
 def adjust_umbalance_problem(df_cap, df_conn, cap_prov, cap_client ):
     """
-    Add node to problem.
+    Args:
+        df_cap (pd.DataFrame): data frame containing nodes capacity info. 
+        df_conn (pd.DataFrame): dataframe containing edges/connections info. 
+        cap_prov (int): total supply. 
+        cap_client (int): total demand.
+
+    Returns: 
+        (pd.DataFrame): data frame containing nodes capacity info
+        (pd.DataFrame): dataframe containing edges/connections info.
     """
 
     if cap_prov > cap_client:
@@ -81,6 +100,10 @@ def strip_col(_df, cols):
     """
     Strip leading and trailing spaces in a 
     str column. 
+
+    Args:
+        df (pd.DataFrame): dataframe containig
+        cols (list): columns to strip.
     """
 
     for col in cols:
